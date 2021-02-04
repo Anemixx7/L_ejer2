@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8" />
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+            box-shadow: 5px 5px 5px #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>' + 'contributors',
+            maxZoom: 18
+        });
+        var map = L.map('map', {
+            center: [1.61389, -75.6128], zoom: 13,
+            layers: osm, scrollWheelZoom: false,
+        });
+
+        var Uniamazonia = L.marker(
+            [1.6201693720933799, -75.60426356912865]
+        ).addTo(map)
+            .bindPopup('Universidad de la Amazonia')
+            .openPopup();
+
+        var Alcaldia = L.marker(
+            [1.6150942, -75.6160003]
+        ).addTo(map)
+            .bindPopup('Alcaldía Florencia')
+            .openPopup();
+
+        var AlcaldiaArea = L.circle([1.6150942, -75.6160003], 500, {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5
+        }).addTo(map);
+
+        var PlazaSantander = L.marker(
+            [1.614922, -75.613264]
+        ).addTo(map)
+            .bindPopup('Plaza Santander')
+            .openPopup();
+
+        var polygonPlaza = L.polygon([
+            [1.615362, -75.613092],
+            [1.615179, -75.613640],
+            [1.614557, -75.613457],
+            [1.614718, -75.612888]
+        ]).addTo(map)
+
+        var pointA = new L.LatLng(1.6004425518060414, -75.58747167523991);
+        var pointB = new L.LatLng(1.6019703322562306, -75.59040712994971);
+        var pointC = new L.LatLng(1.6051956427971334, -75.5976123369647);
+        var pointD = new L.LatLng(1.6065536668764522, -75.59887385473134);
+        var pointE = new L.LatLng(1.6066749189726817, -75.60042649193322);
+        var pointF = new L.LatLng(1.608614951574308, -75.60450216462365);
+        var pointG = new L.LatLng(1.6102397274719675, -75.6041382652853);
+        var pointH = new L.LatLng(1.6129800181347504, -75.60615184165648);
+        var pointI = new L.LatLng(1.6155020523972992, -75.60428382505576);
+        var pointJ = new L.LatLng(1.6188000923965018, -75.60649148110565);
+        var pointK = new L.LatLng(1.620061106254114, -75.60525422333541);
+        var pointL = new L.LatLng(1.6201693720933799, -75.60426356912865);
+        var latlngs = [pointA, pointB, pointC, pointD, pointE,pointF,pointG,pointH,pointI,pointJ,pointK,pointL];
+        var polyline = L.polyline(
+            latlngs, { color: 'black' }
+        ).addTo(map)
+            .bindPopup('Ruta: Mi casa - Uniamazonia');
+
+        L.control.scale().addTo(map);
+    </script>
+</body>
+
+</html>
